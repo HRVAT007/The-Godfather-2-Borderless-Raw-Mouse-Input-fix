@@ -1,0 +1,22 @@
+# --- Build artifacts ---
+*.asi
+*.obj
+*.lib
+*.exp
+*.pdb
+*.ilk
+*.exe
+build_out.txt
+
+# --- Runtime logs written next to the game exe ---
+*.log
+
+# --- Auto-generated at runtime by the plugin (not part of the repo) ---
+gf2fix.ini
+
+# --- OS / editor noise ---
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vs/
+*.user
