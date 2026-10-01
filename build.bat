@@ -18,15 +18,19 @@ if not defined VCVARS (
 )
 call "%VCVARS%" >nul
 
-rem --- Build the ASI (32-bit DLL). Output: gf2fix.asi ---
+rem --- Build the ASI (32-bit DLL). ---------------------------------------------
+rem The output is deliberately NOT named gf2fix.asi: Modern Fixes treats any ASI whose name
+rem contains GF2 as a competing mod and yields its shared exe patches to it, which crashes the
+rem game on boot on modern CPUs. Building it under the install name makes that impossible to get
+rem wrong. The source keeps the gf2fix name, and so does its generated gf2fix.ini.
 cl /nologo /O2 /MT /LD /W3 /DNDEBUG /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 ^
    /I minhook\include ^
    src\gf2fix.cpp minhook\src\buffer.c minhook\src\hook.c minhook\src\trampoline.c minhook\src\hde\hde32.c ^
-   /Fe:gf2fix.asi /link user32.lib gdi32.lib
+   /Fe:rawmouse.asi /link user32.lib gdi32.lib
 if %errorlevel% neq 0 (
   echo BUILD FAILED
   exit /b 1
 )
 del /q gf2fix.obj buffer.obj hook.obj trampoline.obj hde32.obj gf2fix.lib gf2fix.exp 2>nul
-echo BUILD OK: gf2fix.asi
+echo BUILD OK: rawmouse.asi
 endlocal
